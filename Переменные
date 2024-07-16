@@ -1,0 +1,5 @@
+number_of_tasks = 12
+number_of_hours = 1.5
+course_name = ('python')
+time_for_one_task = 1.5/12
+print(course_name, number_of_tasks, number_of_hours, time_for_one_task)
