@@ -1,0 +1,7 @@
+immutable_var = 1, 'cat', True, 1.2
+print(immutable_var)
+#immutable_var[1] = 10
+#не поддерживает обращения по эллементам
+mutable_list = [1, 'dog', False, 2.1]
+mutable_list[0] = 12
+print(mutable_list)
