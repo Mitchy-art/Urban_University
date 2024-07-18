@@ -3,7 +3,7 @@ name = "Maria"
 print("Name:", name)
 age = 20
 print("Age:", age)
-age = 20+1
+age = age+1
 print("Age:", age)
 is_student = True
 print("Is student:", is_student)
