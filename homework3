@@ -1,3 +1,4 @@
+#Динамическая типизация
 name = "Maria"
 print("Name:", name)
 age = 20
