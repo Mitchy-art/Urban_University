@@ -1,6 +1,7 @@
 def send_email(message, recipient, *, sender="university.help@gmail.com"):
-    global check1, check2, endings
     endings = (".com", ".ru", ".net")
+    check1 = False
+    check2 = False
     if '@' in recipient and '@' in sender:
         check1 = True
     if recipient.endswith(endings) and sender.endswith(endings):
