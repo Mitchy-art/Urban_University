@@ -1,9 +1,9 @@
 class Figure:
     sides_count = 0
 
-    def __init__(self, __sides, __color, filled):
-        self.__sides = __sides if len(__sides)==self.sides_count else [1]*self.sides_count
-        self.__color = __color
+    def __init__(self, color, *sides, filled=True):
+        self.__sides = sides if len(sides)==self.sides_count else [1]*self.sides_count
+        self.__color = color
         self.filled = filled
 
     def get_color(self):
@@ -24,7 +24,7 @@ class Figure:
     #                 return r, g, b
 
     def set_color(self, r, g, b):
-        if self.__is_valid_color(self, r, g, b):
+        if self.__is_valid_color(r, g, b):
             self.__color = r, g, b
 
     @classmethod
@@ -39,7 +39,7 @@ class Figure:
         # else:
         #     return False
 
-    def get_sides(self, __sides):
+    def get_sides(self):
         return self.__sides
 
     def __len__(self):
@@ -60,8 +60,9 @@ class Figure:
 class Circle(Figure):
     sides_count = 1
 
-    def __init__(self, color, circumference):
-        super().__init__(color, circumference)
+    def __init__(self, color, circumference, filled = True):
+        sides = [circumference]
+        super().__init__(color, sides, filled)
         self.__radius = self.get__radius(circumference)
 
     @staticmethod
@@ -76,7 +77,7 @@ class Circle(Figure):
 class Triangle(Figure):
     sides_count = 3
 
-    def __init__(self, __sides, __color, filled):
+    def __init__(self, __sides, __color, filled=True):
         super().__init__(__sides, __color, filled)
 
     def get_square(self):
@@ -89,12 +90,12 @@ class Triangle(Figure):
 class Cube(Figure):
     sides_count = 12
 
-    def __init__(self, color, side):
-        super().__init__(color, *sides)
-        __sides = [side]*12
+    def __init__(self, color, side, filled=True):
+        sides = [side]*12
+        super().__init__(color, *sides, filled=filled)
 
     def get_volume(self):
-        volume = self.__sides[0] * self.__sides[0] * self.__sides[0]
+        volume = self._Figure__sides[0] * self._Figure__sides[0] * self._Figure__sides[0]
         return volume
 
 
