@@ -5,10 +5,9 @@ def personal_sum(numbers):
         #     result = sum(numbers)
     for i in numbers:
         try:
-            print(f'Некорректный тип данных для подсчета суммы - {i}')
             result += i
         except TypeError as exc:
-            #print(exc)
+            print(f'Некорректный тип данных для подсчета суммы - {i}')
             incorrect_data +=1
     return result, incorrect_data
 
@@ -20,9 +19,9 @@ def calculate_average(numbers):
         # for i in numbers:
         #     personal_sum(i)/len(numbers)
         #cal_ave = personal_sum(numbers)/len(numbers)
-    except ZeroDivisionError as exc:
+    except ZeroDivisionError:
         return 0
-    except TypeError as exc:
+    except TypeError:
         print('В numbers записан некорректный тип данных')
 
 print(f'Результат 1: {calculate_average("1, 2, 3")}') # Строка перебирается, но каждый символ - строковый тип
