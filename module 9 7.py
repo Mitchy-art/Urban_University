@@ -8,7 +8,7 @@ def is_prime(func):
         else:
             print('Простое')
         return result_
-    return wrapper()
+    return wrapper
 
 @is_prime
 def sum_three(a, b, c):
