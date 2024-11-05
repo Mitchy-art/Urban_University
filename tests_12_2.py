@@ -55,26 +55,32 @@ class TournamentTest(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        for i in cls.all_results.values():
-            print(i)
+        dict_fin = {}
+        for key, value in cls.all_results.items():
+            for k, v in value.items():
+                dict_fin[k] = str(v)
+                print(value)
 
     def test_Us_Nik(self):
         tour_1 = Tournament(90, self.run_1, self.run_3)
-        result = tour_1.start
-        result = self.all_results
-        self.assertTrue(result[max(self.all_results.keys())] == "Ник")
+        results = tour_1.start()
+        TournamentTest.all_results.update(results)
+        self.assertTrue(results[2] == "Ник")
 
     def test_An_Nik(self):
         tour_2 = Tournament(90, self.run_2, self.run_3)
-        result = tour_2.start
-        result = self.all_results
-        self.assertTrue(result[max(self.all_results.keys())] == "Ник")
+        results = tour_2.start()
+        TournamentTest.all_results.update(results)
+        self.assertTrue(results[2] == "Ник")
+
+        # result = self.all_results
+        # self.assertTrue(result[max(self.all_results.keys())] == "Ник")
 
     def test_Us_An_Nik(self):
         tour_3 = Tournament(90, self.run_1, self.run_2, self.run_3)
-        result = tour_3.start
-        result = self.all_results
-        self.assertTrue(result[max(self.all_results.keys())] == "Ник")
+        results = tour_3.start()
+        TournamentTest.all_results.update(results)
+        self.assertTrue(results[3] == "Ник")
 
 
 if __name__ == '__main__':
