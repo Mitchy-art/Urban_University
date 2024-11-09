@@ -4,6 +4,8 @@ import runner_and_tournament as rt
 
 
 class TournamentTest(TestCase):
+    is_frozen = True
+
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
@@ -23,6 +25,7 @@ class TournamentTest(TestCase):
                 # dict_fin[k] = v.name
                 # print(value)
 
+    @unittest.skipIf(True, 'Тесты в этом кейсе заморожены')
     def test_Us_Nik(self):
         tour_1 = rt.Tournament(90, self.run_1, self.run_3)
         results = tour_1.start()
@@ -31,6 +34,7 @@ class TournamentTest(TestCase):
         # TournamentTest.all_results.update(results)
         # self.assertTrue(results[2] == "Ник")
 
+    @unittest.skipIf(True, 'Тесты в этом кейсе заморожены')
     def test_An_Nik(self):
         tour_2 = rt.Tournament(90, self.run_2, self.run_3)
         results = tour_2.start()
@@ -42,6 +46,7 @@ class TournamentTest(TestCase):
         # result = self.all_results
         # self.assertTrue(result[max(self.all_results.keys())] == "Ник")
 
+    @unittest.skipIf(True, 'Тесты в этом кейсе заморожены')
     def test_Us_An_Nik(self):
         tour_3 = rt.Tournament(90, self.run_1, self.run_2, self.run_3)
         results = tour_3.start()
@@ -49,7 +54,6 @@ class TournamentTest(TestCase):
         self.all_results['test_turn3'] = results
         # TournamentTest.all_results.update(results)
         # self.assertTrue(results[3] == "Ник")
-
 
 if __name__ == '__main__':
     unittest.main()
