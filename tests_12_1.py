@@ -1,3 +1,4 @@
+import unittest
 from unittest import TestCase
 
 
@@ -17,18 +18,23 @@ class Runner:
 
 
 class RunnerTest(TestCase):
+    is_frozen = False
+
+    @unittest.skipIf(False, '')
     def test_walk(self):
         run_1 = Runner('test_1')
         for i in range(10):
             Runner.walk(run_1)
         self.assertEqual(run_1.distance, 50)
 
+    @unittest.skipIf(False, '')
     def test_run(self):
         run_2 = Runner('test_2')
         for i in range(10):
             Runner.run(run_2)
         self.assertEqual(run_2.distance, 100)
 
+    @unittest.skipIf(False, '')
     def test_challenge(self):
         run_3 = Runner('test_3')
         run_4 = Runner('test_4')
