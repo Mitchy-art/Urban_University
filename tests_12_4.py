@@ -21,6 +21,7 @@ class RunnerTest(TestCase):
             self.assertEqual(run_1.distance, 50)
         except ValueError as err:
             logging.warning("Неверная скорость для Runner")
+            logging.error(traceback.format_exc())
 
     @unittest.skipIf(False, '')
     def test_run(self):
@@ -32,3 +33,4 @@ class RunnerTest(TestCase):
             self.assertEqual(run_2.distance, 100)
         except TypeError as err:
             logging.warning('Неверный тип данных для объекта Runner')
+            logging.error(traceback.format_exc())
