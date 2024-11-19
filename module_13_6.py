@@ -5,24 +5,25 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
-api = ''
+api = '7783483077:AAHzY1BOlciBVZn47bkB8ypltBNBauBCmhw'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-# kb = ReplyKeyboardMarkup(resize_keyboard=True)
-# button1 = KeyboardButton(text='Рассчитать')
-# button2 = KeyboardButton(text='Информация')
-# kb.add(button1, button2)
+kb = ReplyKeyboardMarkup(resize_keyboard=True)
+button1 = KeyboardButton(text='Рассчитать')
+button2 = KeyboardButton(text='Информация')
+kb.add(button1, button2)
 
-# menu = ReplyKeyboardMarkup([
-#     keyboard=[
-#     [KeyboardButton(text='')]
-# ]
-# ])
 Inkb = InlineKeyboardMarkup()
 button3 = InlineKeyboardButton(text='Рассчитать норму калорий', callback_data='calories')
 button4 = InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')
 Inkb.add(button3, button4)
+
+
+@dp.message_handler(commands=['start'])
+async def start(message):
+    print('Привет! Я бот помогающий твоему здоровью.')
+    await message.reply('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 @dp.message_handler(text='Рассчитать')
@@ -32,8 +33,15 @@ async def main_menu(message):
 
 @dp.callback_query_handler(text='formulas')
 async def get_formulas(call):
-    await call.message.answer('для мужчин: 10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г) + 5;',
-                              'для женщин: 10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161.')
+    await call.message.answer('для женщин: 10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161')
+    await call.answer()
+
+
+@dp.callback_query_handler(text='calories')
+async def set_age(call):
+    print('Введите свой возраст:')
+    await call.message.answer('Введите свой возраст:')
+    await UserState.age.set()
     await call.answer()
 
 
@@ -41,14 +49,6 @@ class UserState(StatesGroup):
     age = State()
     growth = State()
     weight = State()
-
-
-@dp.callback_query_handler(text='calories')
-async def set_age(call):
-    print('Введите свой возраст:')
-    await call.answer('Введите свой возраст:')
-    await UserState.age.set()
-    await call.answer()
 
 
 @dp.message_handler(state=UserState.age)
@@ -75,12 +75,6 @@ async def send_calories(message, state):
     calory = 10 * weight + 6, 25 * growth - 5 * age - 161
     await message.answer(f'Ваша норма каллорий равна {calory}')
     await state.finish()
-
-
-@dp.message_handler(commands=['start'])
-async def start(message):
-    print('Привет! Я бот помогающий твоему здоровью.')
-    await message.reply('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 @dp.message_handler()
