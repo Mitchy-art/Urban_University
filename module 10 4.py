@@ -55,6 +55,7 @@ class Cafe:
                 return True
         return False
 
+
 tables = [Table(number) for number in range(1, 6)]
 guests_names = [
     'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
