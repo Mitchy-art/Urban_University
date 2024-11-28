@@ -33,7 +33,7 @@ Inkb.add(button8, button9)
 @dp.message_handler(commands=['start'])
 async def start(message):
     print('Привет! Я бот помогающий твоему здоровью.')
-    await message.reply('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 @dp.message_handler(text='Рассчитать')
