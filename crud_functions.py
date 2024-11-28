@@ -1,7 +1,10 @@
 import sqlite3
 
-connection = sqlite3.connect('initiate_db')
+num = 0
+
+connection = sqlite3.connect('initiate.db')
 cursor = connection.cursor()
+
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS Products(
@@ -14,9 +17,13 @@ price INTEGER NOT NULL
 
 #cursor.execute('CREATE INDEX IF NOT EXISTS idx_email ON Users(email)')
 
-for i in range(1, 5):
-    cursor.execute('INSERT INTO Products (title, description, price) VALUES (?, ?, ?)',
-                   (f'Продукт{i}', f'Описание{i}', f'{i}00'))
+while num is 0:
+    for i in range(1, 5):
+        cursor.execute('INSERT INTO Products (title, description, price) VALUES (?, ?, ?)',
+                       (f'Продукт{i}', f'Описание{i}', f'{i}00'))
+        num += 1
+
+connection.commit()
 
 
 def get_all_products():
