@@ -21,8 +21,8 @@ async def get_users() -> List[User]:
 
 @app.post('/user/{username}/{age}')
 async def create_user(
-        username: str = Path(min_length=5, max_length=20, description='Enter username', example='UrbanUser'),
-        age: int = Path(ge=18, le=120, description='Enter age', example='24')) -> User:
+        username: Annotated[str, Path(min_length=5, max_length=20, description='Enter username', example='UrbanUser')],
+        age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='24')]) -> User:
     global next_user_id
     new_user = User(id=next_user_id, username=username, age=age)
     users.append(new_user)
@@ -32,9 +32,9 @@ async def create_user(
 
 @app.put('/user/{user_id}/{username}/{age}')
 async def update_user(
-        user_id: int = Path(description='Enter user ID', example='1'),
-        username: str = Path(min_length=5, max_length=20, description='Enter username', example='UrbanUser'),
-        age: int = Path(ge=18, le=120, description='Enter age', example='24')) -> User:
+        user_id: Annotated[int, Path(description='Enter user ID', example='1')],
+        username: Annotated[str, Path(min_length=5, max_length=20, description='Enter username', example='UrbanUser')],
+        age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='24')]) -> User:
     for user in users:
         if user.id == user_id:
             user.username = username
@@ -44,7 +44,7 @@ async def update_user(
 
 
 @app.delete('/user/{user_id}')
-async def delete_user(user_id: int = Path(description='Enter user ID', example='2')) -> User:
+async def delete_user(user_id: Annotated[int, Path(description='Enter user ID', example='2')]) -> User:
     for i, user in enumerate(users):
         if user.id == user_id:
             deleted_user = users.pop(i)
